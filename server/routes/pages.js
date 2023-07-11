@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport')
+const  passport1  = require('../config/passport');
 const  isAuthenticated  = require('../middlewares/auth');
-const  passport  = require('../config/passport');
+
+
 
 
 router.get('/', (req, res) => {
@@ -11,10 +14,11 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   res.render("login");
 });
-
 router.post('/login', passport.authenticate('local', {
+  
   successRedirect: '/dashboard',
   failureRedirect: '/login',
+  failureFlash: true
 }));
 
 router.get('/dashboard', isAuthenticated, (req, res) => {

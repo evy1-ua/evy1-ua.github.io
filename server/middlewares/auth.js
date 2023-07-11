@@ -1,4 +1,5 @@
 function isAuthenticated(req, res, next) {
+  console.log("hola");
     if (req.isAuthenticated()) {
       // Si el usuario está autenticado, continuamos con la siguiente función middleware
       return next();
