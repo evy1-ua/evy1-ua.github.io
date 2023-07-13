@@ -1,12 +1,15 @@
-function isAuthenticated(req, res, next) {
-  console.log("hola");
-    if (req.isAuthenticated()) {
-      // Si el usuario está autenticado, continuamos con la siguiente función middleware
-      return next();
-    }
-    // Si el usuario no está autenticado, redirigimos a la página de inicio de sesión
-    res.redirect('/login');
+const passport = require('passport');
+const authMiddleware = (req, res, next) => {
+  // Verificar si el usuario está autenticado
+  if (req.isAuthenticated()) {
+    console.log("Usuario autenticado");
+    // El usuario está autenticado, continuar con la siguiente función middleware
+    next();
+  } else {
+    // El usuario no está autenticado, redirigir a la página de inicio de sesión
+    console.log("Usuario no autenticado");
+    res.redirect('/');
   }
-  
-  module.exports = isAuthenticated;
-  
+};
+
+module.exports = authMiddleware;

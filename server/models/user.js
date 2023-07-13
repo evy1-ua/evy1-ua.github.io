@@ -62,11 +62,51 @@
              }
          });
      }
+     static findOneByEmail(email) {
+        return new Promise((resolve, reject) => {
+          const query = 'SELECT * FROM users WHERE email = ?';
+          const values = [email];
+          connection.query(query, values, (error, results) => {
+            if (error) {
+              reject(error);
+            } else {
+              const userRow = results[0];
+              if (userRow) {
+                const user = new User(userRow.id, userRow.name, userRow.email, userRow.password);
+                
+                resolve(user);
+              } else {
+                resolve(null);
+              }
+            }
+          });
+        });
+      }
+      static findById(id) {
+        return new Promise((resolve, reject) => {
+          const query = 'SELECT * FROM users WHERE id = ?';
+          const values = [id];
+      
+          connection.query(query, values, (error, results) => {
+            if (error) {
+              reject(error);
+            } else {
+              const userRow = results[0];
+              if (userRow) {
+                const user = new User(userRow.id, userRow.name, userRow.email, userRow.password);
+                resolve(user);
+              } else {
+                resolve(null);
+              }
+            }
+          });
+        });
+      }
+      
      comparePassword(password){
          //Contraseña con hash
          // return bcrypt.compareSync(password, this.password);
          //Contraseña texto plano
-         console.log(password);
          return this.password === password;
      }
  }

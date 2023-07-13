@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
+
 passport.use(new LocalStrategy(
   {
     usernameField: 'email',
@@ -9,13 +10,13 @@ passport.use(new LocalStrategy(
   },
   async (email, password, done) => {
     try {
+      console.log("passport");
       // Lógica de autenticación, por ejemplo, buscar el usuario en la base de datos y verificar las credenciales
-      const user = await User.findOne({ email });
+      const user = await User.findOneByEmail(email);
 
       if (!user || !user.comparePassword(password)) {
         return done(null, false, { message: 'Credenciales inválidas' });
       }
-
       return done(null, user);
     } catch (error) {
       return done(error);

@@ -5,10 +5,9 @@ const UserController = {
     User.getAllUsers((error, users) => {
       if (error) {
         console.error('Error al obtener los usuarios:', error);
-        res.status(500).json({ error: 'Error al obtener los usuarios' });
-      } else {
-        res.json(users);
+        return res.status(500).json({ error: 'Error al obtener los usuarios' });
       }
+      res.json(users);
     });
   },
 
@@ -19,10 +18,9 @@ const UserController = {
     newUser.save((error, savedUser) => {
       if (error) {
         console.error('Error al guardar el usuario:', error);
-        res.status(500).json({ error: 'Error al guardar el usuario' });
-      } else {
-        res.json(savedUser);
+        return res.status(500).json({ error: 'Error al guardar el usuario' });
       }
+      res.json(savedUser);
     });
   },
 
@@ -33,10 +31,9 @@ const UserController = {
     updatedUser.update((error, updatedUser) => {
       if (error) {
         console.error('Error al actualizar el usuario:', error);
-        res.status(500).json({ error: 'Error al actualizar el usuario' });
-      } else {
-        res.json(updatedUser);
+        return res.status(500).json({ error: 'Error al actualizar el usuario' });
       }
+      res.json(updatedUser);
     });
   },
 
@@ -47,18 +44,15 @@ const UserController = {
     userToDelete.delete((error) => {
       if (error) {
         console.error('Error al eliminar el usuario:', error);
-        res.status(500).json({ error: 'Error al eliminar el usuario' });
-      } else {
-        res.json({ message: 'Usuario eliminado correctamente' });
+        return res.status(500).json({ error: 'Error al eliminar el usuario' });
       }
+      res.json({ message: 'Usuario eliminado correctamente' });
     });
   },
 
   getHelloWorld7: (req, res) => {
     res.send("Hola Mundo7");
   }
-
-  
 };
 
 module.exports = UserController;
