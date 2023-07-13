@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "start": "node server",
-    "build": "react-scripts build"
+    "start": "node server"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
