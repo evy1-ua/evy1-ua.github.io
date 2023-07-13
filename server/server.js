@@ -47,14 +47,13 @@ connection.connect((error) => {
   }
 });
 // Configuración de la carpeta de archivos estáticos
-// const url = path.join(__dirname, "..", "client", "build");
-// app.use(express.static(url));
-// console.log(url);
-
-// // Ruta para todas las solicitudes que no sean a los archivos estáticos
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-// });
+ const url = path.join(__dirname, "..", "client", "build");
+ app.use(express.static(url));
+ console.log(url)
+ // Ruta para todas las solicitudes que no sean a los archivos estáticos
+ app.get("*", (req, res) => {
+   res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+ });
 
 // Configurar el motor de vistas
   const viewsPath = path.join(__dirname, '..', 'client', 'src','views');
